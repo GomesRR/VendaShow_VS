@@ -1,0 +1,52 @@
+# 📘 Documentação de Utilização - VendaShow 1.0.0
+![Capa](./vendashow_images/page1_img1.png)
+## ⚙️ Parâmetros de Desenvolvimento
+- **Banco de Dados**: Firebird 2.5
+- **Versão do Delphi**: Delphi 12.3 Athens
+- **Componentes não nativos**:
+  - ACBr
+  - Ethea Styled Components Library
+  - Fast Report 2024.2.5
+
+![Configuração](./vendashow_images/page3_img1.png)
+![Execução](./vendashow_images/page3_img2.png)
+![Tela Inicial](./vendashow_images/page4_img1.png)
+![Menus](./vendashow_images/page4_img2.png)
+![Imagem da página 5](./vendashow_images/page5_img1.png)
+![Imagem da página 5](./vendashow_images/page5_img2.png)
+![Imagem da página 5](./vendashow_images/page5_img3.png)
+![Imagem da página 6](./vendashow_images/page6_img1.png)
+![Imagem da página 6](./vendashow_images/page6_img2.png)
+![Imagem da página 7](./vendashow_images/page7_img1.png)
+![Imagem da página 7](./vendashow_images/page7_img2.png)
+![Imagem da página 8](./vendashow_images/page8_img1.png)
+![Imagem da página 8](./vendashow_images/page8_img2.png)
+![Imagem da página 9](./vendashow_images/page9_img1.png)
+![Imagem da página 9](./vendashow_images/page9_img2.png)
+![Imagem da página 10](./vendashow_images/page10_img1.png)
+![Imagem da página 10](./vendashow_images/page10_img2.png)
+![Imagem da página 11](./vendashow_images/page11_img1.png)
+![Imagem da página 11](./vendashow_images/page11_img2.png)
+![Imagem da página 12](./vendashow_images/page12_img1.png)
+![Imagem da página 12](./vendashow_images/page12_img2.png)
+![Imagem da página 13](./vendashow_images/page13_img1.png)
+![Imagem da página 13](./vendashow_images/page13_img2.png)
+![Imagem da página 14](./vendashow_images/page14_img1.png)
+![Imagem da página 14](./vendashow_images/page14_img2.png)
+![Imagem da página 15](./vendashow_images/page15_img1.png)
+![Imagem da página 15](./vendashow_images/page15_img2.png)
+![Imagem da página 16](./vendashow_images/page16_img1.png)
+![Imagem da página 16](./vendashow_images/page16_img2.png)
+![Imagem da página 17](./vendashow_images/page17_img1.png)
+![Imagem da página 17](./vendashow_images/page17_img2.png)
+![Imagem da página 18](./vendashow_images/page18_img1.png)
+![Imagem da página 18](./vendashow_images/page18_img2.png)
+![Imagem da página 19](./vendashow_images/page19_img1.png)
+![Imagem da página 19](./vendashow_images/page19_img2.png)
+![Imagem da página 20](./vendashow_images/page20_img1.png)
+![Imagem da página 20](./vendashow_images/page20_img2.png)
+![Imagem da página 21](./vendashow_images/page21_img1.png)
+![Imagem da página 21](./vendashow_images/page21_img2.png)
+![Imagem da página 21](./vendashow_images/page21_img3.png)
+![Imagem da página 22](./vendashow_images/page22_img1.png)
+![Imagem da página 22](./vendashow_images/page22_img2.png)
