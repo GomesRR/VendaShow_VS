@@ -28,7 +28,6 @@ object dmDados: TdmDados
       'VendorLib=fbclient.dll'
       'VendorLibWin64=fbclient.dll'
       'VendorLibOsx=/Library/Frameworks/Firebird.framework/Firebird'
-      'Database=database.fdb'
       'Role=RoleName'
       'MaxBlobSize=-1'
       'TrimChar=False'
@@ -50,7 +49,11 @@ object dmDados: TdmDados
         'ste_Tecnico_Viasoft\database\database.fdb,RoleName=RoleName,User' +
         '_Name=sysdba,Password=masterkey,ServerCharSet=UTF8,SQLDialect=3,' +
         'ErrorResourceFile=,LocaleCode=0000,BlobSize=-1,CommitRetain=Fals' +
-        'e,WaitOnLocks=True,IsolationLevel=ReadCommitted,Trim Char=False')
+        'e,WaitOnLocks=True,IsolationLevel=ReadCommitted,Trim Char=False'
+      
+        'Database=E:\Projetos_GIT\VendaShow_VS\Aplica'#231#227'o\database\Databas' +
+        'e.fdb')
+    Connected = True
     Left = 64
     Top = 40
   end
@@ -155,7 +158,7 @@ object dmDados: TdmDados
     Params = <>
     SQLConnection = SQLConnection1
     Left = 400
-    Top = 568
+    Top = 704
   end
   object dsoCadastroVendedores: TDataSource
     DataSet = ClientDataSetCadastroVendedores
@@ -808,20 +811,242 @@ object dmDados: TdmDados
       'WHERE ID_PRODUTO = :ID_PRODUTO')
     SQLConnection = SQLConnection1
     Left = 40
-    Top = 568
+    Top = 704
   end
   object qryExcluirCadastro: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = SQLConnection1
     Left = 152
-    Top = 568
+    Top = 704
   end
   object qryInativaCadastro: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = SQLConnection1
     Left = 264
+    Top = 704
+  end
+  object qryImprimevendas: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT VENDAS.ID_VENDA'
+      '            ,VENDAS.DT_VENDA'
+      '            ,VENDAS.VL_TOTAL'
+      '           ,VENDEDORES.NM_VENDEDOR'
+      '           ,VENDAS.ID_VENDEDOR'
+      '           ,VENDAS.ID_CLIENTE'
+      '           ,VENDAS.VL_SUB_TOTAL'
+      '           ,VENDAS.VL_ACRESCIMO'
+      '           ,VENDAS.VL_DESCONTO'
+      '           ,VENDAS.TP_FORMA_PAGAMENTO'
+      'FROM VENDAS'
+      '            INNER JOIN VENDEDORES'
+      '            ON VENDEDORES.ID_VENDEDOR = VENDAS.ID_VENDEDOR')
+    SQLConnection = SQLConnection1
+    Left = 40
     Top = 568
+    object IntegerField1: TIntegerField
+      FieldName = 'ID_VENDA'
+      Required = True
+    end
+    object FMTBCDField1: TFMTBCDField
+      FieldName = 'VL_TOTAL'
+      Precision = 18
+      Size = 2
+    end
+    object SQLTimeStampField1: TSQLTimeStampField
+      FieldName = 'DT_VENDA'
+    end
+    object WideStringField1: TWideStringField
+      FieldName = 'NM_VENDEDOR'
+      Size = 400
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'ID_VENDEDOR'
+    end
+    object IntegerField3: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+    object FMTBCDField2: TFMTBCDField
+      FieldName = 'VL_SUB_TOTAL'
+      Precision = 18
+      Size = 2
+    end
+    object FMTBCDField3: TFMTBCDField
+      FieldName = 'VL_ACRESCIMO'
+      Precision = 18
+      Size = 2
+    end
+    object FMTBCDField4: TFMTBCDField
+      FieldName = 'VL_DESCONTO'
+      Precision = 18
+      Size = 2
+    end
+    object WideStringField2: TWideStringField
+      FieldName = 'TP_FORMA_PAGAMENTO'
+      FixedChar = True
+      Size = 4
+    end
+  end
+  object dsoImprimevendas: TDataSource
+    AutoEdit = False
+    DataSet = ClientDataSetImprimevendas
+    Left = 520
+    Top = 568
+  end
+  object DataSetProviderImprimevendas: TDataSetProvider
+    DataSet = qryImprimevendas
+    Left = 192
+    Top = 568
+  end
+  object ClientDataSetImprimevendas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DataSetProviderImprimevendas'
+    Left = 368
+    Top = 568
+    object IntegerField4: TIntegerField
+      FieldName = 'ID_VENDA'
+      Required = True
+    end
+    object FMTBCDField5: TFMTBCDField
+      FieldName = 'VL_TOTAL'
+      DisplayFormat = 'R$ ,0.00'
+      Precision = 18
+      Size = 2
+    end
+    object SQLTimeStampField2: TSQLTimeStampField
+      FieldName = 'DT_VENDA'
+    end
+    object WideStringField3: TWideStringField
+      FieldName = 'NM_VENDEDOR'
+      Size = 400
+    end
+    object IntegerField5: TIntegerField
+      FieldName = 'ID_VENDEDOR'
+    end
+    object IntegerField6: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+    object FMTBCDField6: TFMTBCDField
+      FieldName = 'VL_SUB_TOTAL'
+      Precision = 18
+      Size = 2
+    end
+    object FMTBCDField7: TFMTBCDField
+      FieldName = 'VL_ACRESCIMO'
+      Precision = 18
+      Size = 2
+    end
+    object FMTBCDField8: TFMTBCDField
+      FieldName = 'VL_DESCONTO'
+      Precision = 18
+      Size = 2
+    end
+    object WideStringField4: TWideStringField
+      FieldName = 'TP_FORMA_PAGAMENTO'
+      FixedChar = True
+      Size = 4
+    end
+  end
+  object qryImprimeItemVendas: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_Venda'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT ID_ITEM_VENDA,'
+      '       ID_VENDA,'
+      '       QT_ITEM,'
+      '       VL_UNITARIO,'
+      '       VL_TOTAL_ITEM,'
+      '       ITEMVENDAS.ID_PRODUTO,'
+      '       PRODUTOS.DESCRICAO'
+      'FROM ITEMVENDAS'
+      '     LEFT JOIN PRODUTOS'
+      '     ON PRODUTOS.ID_PRODUTO = ITEMVENDAS.ID_PRODUTO'
+      'WHERE ID_VENDA = :ID_Venda'
+      'ORDER BY ID_ITEM_VENDA;'
+      '')
+    SQLConnection = SQLConnection1
+    Left = 56
+    Top = 632
+    object qryImprimeItemVendasID_ITEM_VENDA: TIntegerField
+      FieldName = 'ID_ITEM_VENDA'
+      Required = True
+    end
+    object qryImprimeItemVendasID_VENDA: TIntegerField
+      FieldName = 'ID_VENDA'
+    end
+    object qryImprimeItemVendasQT_ITEM: TIntegerField
+      FieldName = 'QT_ITEM'
+    end
+    object qryImprimeItemVendasVL_UNITARIO: TFMTBCDField
+      FieldName = 'VL_UNITARIO'
+      Precision = 18
+      Size = 2
+    end
+    object qryImprimeItemVendasVL_TOTAL_ITEM: TFMTBCDField
+      FieldName = 'VL_TOTAL_ITEM'
+      Precision = 18
+      Size = 2
+    end
+    object qryImprimeItemVendasID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object qryImprimeItemVendasDESCRICAO: TWideStringField
+      FieldName = 'DESCRICAO'
+      Size = 400
+    end
+  end
+  object dsoImprimeItemVendas: TDataSource
+    AutoEdit = False
+    DataSet = ClientDataSetImprimeItemVendas
+    Left = 608
+    Top = 632
+  end
+  object DataSetProviderImprimeItemVendas: TDataSetProvider
+    DataSet = qryImprimeItemVendas
+    Left = 240
+    Top = 632
+  end
+  object ClientDataSetImprimeItemVendas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DataSetProviderImprimeItemVendas'
+    Left = 448
+    Top = 632
+    object ClientDataSetImprimeItemVendasID_ITEM_VENDA: TIntegerField
+      FieldName = 'ID_ITEM_VENDA'
+      Required = True
+    end
+    object ClientDataSetImprimeItemVendasID_VENDA: TIntegerField
+      FieldName = 'ID_VENDA'
+    end
+    object ClientDataSetImprimeItemVendasQT_ITEM: TIntegerField
+      FieldName = 'QT_ITEM'
+    end
+    object ClientDataSetImprimeItemVendasVL_UNITARIO: TFMTBCDField
+      FieldName = 'VL_UNITARIO'
+      Precision = 18
+      Size = 2
+    end
+    object ClientDataSetImprimeItemVendasVL_TOTAL_ITEM: TFMTBCDField
+      FieldName = 'VL_TOTAL_ITEM'
+      Precision = 18
+      Size = 2
+    end
+    object ClientDataSetImprimeItemVendasID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object ClientDataSetImprimeItemVendasDESCRICAO: TWideStringField
+      FieldName = 'DESCRICAO'
+      Size = 400
+    end
   end
 end

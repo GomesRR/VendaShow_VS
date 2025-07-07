@@ -96,6 +96,7 @@ begin
       frmvendas.ResetVenda;
 
       dmDados.qryVendas.Locate('ID_VENDA', dbgVendas.DataSource.DataSet.FieldByName('ID_VENDA').AsInteger, []);
+      frmVendas.ID_Venda_Imp := dbgVendas.DataSource.DataSet.FieldByName('ID_VENDA').AsInteger;
 
       frmVendas.lblNumVenda.Caption := dmDados.qryVendas.FieldByName('ID_VENDA').AsString;
       frmvendas.lblDtvenda.Caption := FormatDateTime('dd/mm/yyyy',dmDados.qryVendas.FieldByName('DT_Venda').AsDateTime);
@@ -140,10 +141,11 @@ begin
       frmvendas.lblNumVenda.Visible := True;
       frmvendas.lblTxtDTVenda.Visible := True;
       frmvendas.lblDTVenda.Visible := True;
+      frmvendas.btnImprimir.Visible := True;
       frmVendas.DesativaControles;
       frmVendas.ShowModal;
     finally
-      frmVendas.Free;
+      FreeAndNil(frmVendas);
     end;
 
   end;

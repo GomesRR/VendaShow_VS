@@ -96,6 +96,11 @@ begin
   end
   else
   begin
+    if not (dmDados.qryCadastroClientes.Active) then
+    begin
+      dmDados.qryCadastroClientes.Open;
+    end;
+
     dmDados.qryCadastroClientes.Locate('ID_CLIENTE', dbgClientes.DataSource.DataSet.FieldByName('ID_CLIENTE').AsInteger, []);
     ID_Cliente  := dmDados.dsoCadastroClientes.DataSet.FieldByName('ID_CLIENTE').AsInteger;
     frmVendas.ID_Cliente := ID_cliente;

@@ -6,7 +6,9 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB,
   Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, System.Math, Vcl.ButtonStylesAttributes,
-  Vcl.StyledTaskDialog, DateUtils, uProdutoController;
+  Vcl.StyledTaskDialog, DateUtils, uProdutoController, frxSmartMemo, frxClass,
+   uVendaController, frxPDFViewer, frxDBSet, frCoreClasses, frxTableObject,
+  Vcl.StyledButton;
 
 type
   TfrmVendas = class(TForm)
@@ -61,6 +63,10 @@ type
     lblNumVenda: TLabel;
     lblTxtDtVenda: TLabel;
     lblDtvenda: TLabel;
+    dbImprimeVenda: TfrxDBDataset;
+    dbImprimetensVenda: TfrxDBDataset;
+    frxImprimirVenda: TfrxReport;
+    btnImprimir: TStyledGraphicButton;
     procedure Timer1Timer(Sender: TObject);
     procedure btnAdicionarItemClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -79,6 +85,8 @@ type
     procedure btnIdentificarClienteClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
+    procedure ImprimirVenda(ID_Venda: Integer; Report: TFrxReport);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -86,6 +94,7 @@ type
     TP_Forma_Pagamento: string;
     ID_Vendedor: Integer;
     ID_Cliente: Integer;
+    ID_Venda_Imp: integer;
     PE_Desconto, PE_Acrescimo: Float32;
     VL_Desconto, VL_Acrescimo, VL_Sub_Total, VL_Total: Currency;
     ST_Venda: String; //V = Vendendo , C = Consultando venda
@@ -126,6 +135,8 @@ begin
 
   lblTxtDTVenda.Visible := False;
   lblDTVenda.Visible := False;
+
+  btnImprimir.Visible := False;
 
   lblIDCLIENTE.Caption   := 'Aguardando Identificação...';
   lblNMCLIENTE.Caption   := '...';
@@ -174,6 +185,11 @@ begin
   if (Key = VK_F6 ) then
   begin
     btnEncerrarVenda.Click;
+  end;
+
+   if (Key = VK_F7 ) then
+  begin
+    btnImprimir.Click;
   end;
 end;
 
@@ -278,6 +294,7 @@ begin
     finally
       try
         ID_Venda := dmdados.stpGravaVendas.Params.ParamByName('ID_VENDA_OUT').Value;
+        ID_Venda_Imp := ID_Venda;
 
         dmDados.fdmItensVenda.First;
         While not dmDados.fdmItensVenda.Eof do
@@ -307,6 +324,11 @@ begin
       finally
         dlgOK.Text := 'Venda Gravada com sucesso!';
         dlgOK.Execute;
+
+        if (dlgOK.ModalResult = mrOK) then
+        begin
+          ImprimirVenda(ID_Venda, frxImprimirvenda);
+        end;
 
         dlgQuestion.Text := 'Deseja continuar Realizando Vendas?';
         dlgQuestion.Execute;
@@ -355,6 +377,11 @@ begin
   finally
     frmClientes.Free;
   end;
+end;
+
+procedure TfrmVendas.btnImprimirClick(Sender: TObject);
+begin
+  ImprimirVenda(ID_Venda_Imp, frxImprimirVenda);
 end;
 
 procedure TfrmVendas.Timer1Timer(Sender: TObject);
@@ -456,6 +483,25 @@ begin
   frmVendas.lblCOMPLEMENTO.Caption := Complemento;
   frmVendas.lblCIDADE.Caption      := Cidade;
   frmVendas.lblUF.Caption          := UF;
+end;
+
+procedure TFrmVendas.ImprimirVenda(ID_Venda: Integer; Report: TFrxReport);
+var
+  Venda : TVendaController;
+begin
+  Venda := TVendaController.Create;
+  Try
+    Try
+      Venda.ImprimirVenda(ID_Venda, Report);
+    except on E: Exception do
+      begin
+        dlgError.Text := 'Erro na impresso da venda. ~Contactar o Suporte!';
+        dlgError.Execute;
+      end;
+    end;
+  Finally
+    Venda.Free;
+  End;
 end;
 
 end.
